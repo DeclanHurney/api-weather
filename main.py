@@ -9,7 +9,7 @@ def home():
     return render_template("home.html")
 
 @app.route("/api/v1/<station>/<date>")
-def about(station, date):
+def station_temperature(station, date):
     filename = ("data_small/TG_STAID" + str(station).zfill(6) + ".txt")
     print(filename)
     df = pd.read_csv(filename, skiprows=20, parse_dates=['    DATE'])
@@ -22,10 +22,6 @@ def about(station, date):
     # but it was a int. Better is to return a dict
     # df = pd.read_csv("data/" + station + "/" + date + ".csv")
     # return render_template("about.html")
-
-@app.route("/contact/")
-def contact():
-    return render_template("contact.html")
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
